@@ -2,34 +2,48 @@ import { BiDotsVerticalRounded } from "react-icons/bi";
 import styled from "styled-components";
 import pix from "../../../assets/pix.jpg";
 import vid from "../../../assets/vid.mp4";
+import { FC } from "react";
+import AvatarComp from "./AvatarComp";
+import { Link } from "react-router-dom";
 
-const HomeComp = () => {
+interface iProps {
+  props: any;
+}
+
+const HomeComp: FC<iProps> = ({ props }) => {
+  // console.log("reading ", props);
+
   return (
     <div>
-      <Container>
-        <DisplayHolder>
-          <Image src={pix} />
-          <Video src={vid} autoPlay playsInline loop muted />
+      <Link
+        to={`/detailed-page/${props?.id.videoId}`}
+        style={{ textDecoration: "none", color: "black" }}
+      >
+        <Container>
+          <DisplayHolder>
+            <Image src={props?.snippet.thumbnails.high.url} />
+            <Video src={vid} autoPlay playsInline loop muted />
 
-          <Time>10:00</Time>
-        </DisplayHolder>
+            <Time>10:00</Time>
+          </DisplayHolder>
 
-        <Profile>
-          <Avatar />
-          <Content>
-            <Title>Lorem ipsum dolor sit amet.</Title>
-            <Detail>
-              <ChannelName>Peter</ChannelName>
-              <ChannelInfo>
-                <Views>1.3M Views</Views>
-                <Dot />
-                <Views>11 Month Ago</Views>
-              </ChannelInfo>
-            </Detail>
-          </Content>
-          <Icon />
-        </Profile>
-      </Container>
+          <Profile>
+            <AvatarComp channelID={props?.snippet.channelId} />
+            <Content>
+              <Title>{props?.snippet.title}</Title>
+              <Detail>
+                <ChannelName>{props?.snippet.channelTitle}</ChannelName>
+                <ChannelInfo>
+                  <Views>1.3M Views</Views>
+                  <Dot />
+                  <Views>11 Month Ago</Views>
+                </ChannelInfo>
+              </Detail>
+            </Content>
+            <Icon />
+          </Profile>
+        </Container>
+      </Link>
     </div>
   );
 };
@@ -74,16 +88,6 @@ const Title = styled.div`
 const Content = styled.div`
   width: 240px;
   margin-left: 10px;
-`;
-
-const Avatar = styled.div`
-  width: 40px;
-  height: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50%;
-  background-color: darkorange;
 `;
 
 const Profile = styled.div`

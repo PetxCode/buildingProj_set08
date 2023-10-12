@@ -1,7 +1,26 @@
 import styled from "styled-components";
 import NavComp from "../../components/static/NavComp";
-
+import { useState, useEffect } from "react";
+import { getSuggestedVideos, getVideoDetail } from "../../api/API";
+import { useParams } from "react-router-dom";
 const OtherComponent = () => {
+  const { id } = useParams();
+
+  const [vidState, setVidState]: any = useState<{}>();
+
+  //   useEffect(() => {
+  //     getVideoDetail(id!).then((res) => {
+  //       setVidState(res);
+  //     });
+  //   });
+
+  const [state, setState] = useState<Array<{}>>([]);
+  useEffect(() => {
+    getSuggestedVideos().then((res) => {
+      setState(res);
+    });
+  }, []);
+  console.log("reading: ", state);
   return (
     <div>
       <Container>
@@ -10,20 +29,22 @@ const OtherComponent = () => {
           <NavComp text="News" />
         </Main>
 
-        <MainView>
-          <View />
-          <Content>
-            <Title>
-              The Morning Show: Peter Obi On Tinubu’s Certificate Saga
-            </Title>
-            <ChannelName>channel Name</ChannelName>
-            <Views>
-              <Detail>2.4K views</Detail>
-              <Dot />
-              <Detail>32 minutes ago</Detail>
-            </Views>
-          </Content>
-        </MainView>
+        {state?.map((props: any) => (
+          <MainView>
+            <View src={`https://youtube.com/embed/${props.id.videoId}`} />
+            <Content>
+              <Title>
+                The Morning Show: Peter Obi On Tinubu’s Certificate Saga
+              </Title>
+              <ChannelName>channel Name</ChannelName>
+              <Views>
+                <Detail>2.4K views</Detail>
+                <Dot />
+                <Detail>32 minutes ago</Detail>
+              </Views>
+            </Content>
+          </MainView>
+        ))}
       </Container>
     </div>
   );
@@ -63,7 +84,7 @@ const Content = styled.div`
   margin-left: 10px;
 `;
 
-const View = styled.div`
+const View = styled.iframe`
   width: 200px;
   height: 130px;
   background-color: black;
@@ -72,6 +93,7 @@ const View = styled.div`
 
 const MainView = styled.div`
   display: flex;
+  margin: 10px 0;
 `;
 
 const Main = styled.div`

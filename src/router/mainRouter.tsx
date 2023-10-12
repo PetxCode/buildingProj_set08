@@ -16,7 +16,7 @@ export const mainRouter = createBrowserRouter([
     ],
   },
   {
-    path: "/detailed-page",
+    path: "/detailed-page/:id",
     element: <Layout2 />,
     children: [
       {

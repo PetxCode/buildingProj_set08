@@ -4,17 +4,30 @@ import { BsThreeDots } from "react-icons/bs";
 import { PiShareFatLight } from "react-icons/pi";
 import OtherComponent from "./OtherComponent";
 import DescriptionComp from "./DescriptionComp";
+import { useEffect, useState } from "react";
+import { getVideoDetail } from "../../api/API";
+import { useParams } from "react-router-dom";
 
 const DetailedPage = () => {
+  const { id } = useParams();
+
+  const [state, setState]: any = useState<{}>();
+
+  useEffect(() => {
+    getVideoDetail(id!).then((res: any) => {
+      setState(res);
+    });
+  }, []);
+
+  console.log(state);
+
   return (
     <div>
       <Container>
         <Main>
-          <Video />
+          <Video src={`https://youtube.com/embed/${id}`} />
 
-          <Title>
-            Piers Morgan vs Ben Shapiro On Israel-Hamas War | The Full Interview
-          </Title>
+          <Title>{state?.title}</Title>
 
           <MoreDetail>
             <DivHolder>
@@ -22,7 +35,7 @@ const DetailedPage = () => {
                 <Prof>
                   <Avatar />
                   <Info>
-                    <Name>Piers Morgan</Name>
+                    <Name>{state?.channelTitle}</Name>
                     <Sub>1.59M subscribers</Sub>
                   </Info>
                   <ButtonSub>Subscribe</ButtonSub>
@@ -46,7 +59,7 @@ const DetailedPage = () => {
               </Profile>
 
               <Description>
-                <DescriptionComp />
+                <DescriptionComp state={state} />
               </Description>
             </DivHolder>
 
@@ -225,7 +238,7 @@ const Title = styled.div`
   font-weight: 600;
   font-size: 18px;
 `;
-const Video = styled.div`
+const Video = styled.iframe`
   width: 100%;
   height: 75vh;
   object-fit: cover;

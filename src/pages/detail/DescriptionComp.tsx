@@ -1,16 +1,18 @@
 import { FiThumbsUp, FiThumbsDown } from "react-icons/fi";
 import styled from "styled-components";
+import { FC } from "react";
 
-const DescriptionComp = () => {
+interface iProps {
+  state: any;
+}
+
+const DescriptionComp: FC<iProps> = ({ state }) => {
   return (
     <div>
       <Container>
         <Main>
           1.9M views 15 hours ago #piersmorgan #benshapiro
-          #israelpalestineconflict Piers Morgan Uncensored is joined by Jewish
-          political commentator Ben Shapiro to discuss the ongoing conflict
-          between Israel and Hamas after the group massacred over 1,000 Israelis
-          during a festival. …
+          #israelpalestineconflict {state?.description}
         </Main>
         <Numb>27,374 Comments</Numb>
         <br />

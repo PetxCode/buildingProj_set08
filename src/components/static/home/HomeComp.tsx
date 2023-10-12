@@ -1,7 +1,6 @@
 import { BiDotsVerticalRounded } from "react-icons/bi";
 import styled from "styled-components";
-import pix from "../../../assets/pix.jpg";
-import vid from "../../../assets/vid.mp4";
+
 import { FC } from "react";
 import AvatarComp from "./AvatarComp";
 import { Link } from "react-router-dom";
@@ -22,7 +21,7 @@ const HomeComp: FC<iProps> = ({ props }) => {
         <Container>
           <DisplayHolder>
             <Image src={props?.snippet.thumbnails.high.url} />
-            <Video src={vid} autoPlay playsInline loop muted />
+            <Video src={`https://youtube.com/embed/${props?.id.videoId}`} />
 
             <Time>10:00</Time>
           </DisplayHolder>
@@ -119,7 +118,7 @@ const Image = styled.img`
   left: 0;
 `;
 
-const Video = styled.video`
+const Video = styled.iframe`
   width: 100%;
   height: 100%;
   object-fit: cover;

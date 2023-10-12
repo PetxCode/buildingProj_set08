@@ -7,7 +7,13 @@ const NavSlide = () => {
   return (
     <Container>
       <NavComp bg="i" text="All" />
-      <NavComp text="Start" />
+      <NavComp text="News" />
+      <NavComp text="Debates" />
+      <NavComp text="Music" />
+      <NavComp text="Live" />
+      <NavComp text="React routers" />
+      <NavComp text="Troops" />
+      <NavComp text="Website" />
     </Container>
   );
 };

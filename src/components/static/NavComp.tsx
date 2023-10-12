@@ -26,4 +26,9 @@ const Container = styled.div<{ bg?: string }>`
   background-color: ${({ bg }) => (bg ? "black" : "#E5E5E5")};
   border-radius: 5px;
   margin: 10px 5px;
+  transition: all 350ms;
+  &:hover {
+    cursor: pointer;
+    opacity: 0.9;
+  }
 `;

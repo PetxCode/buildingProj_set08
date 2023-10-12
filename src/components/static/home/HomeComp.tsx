@@ -52,17 +52,23 @@ const Views = styled.div``;
 
 const ChannelInfo = styled.div`
   display: flex;
-  font-size: 13px;
+  font-size: 12px;
   align-items: center;
+  margin-top: 5px;
 `;
 
-const ChannelName = styled.div``;
+const ChannelName = styled.div`
+  font-size: 12px;
+  line-height: 1.2;
+  margin-top: 10px;
+`;
 
 const Detail = styled.div``;
 
 const Title = styled.div`
   font-weight: 600;
-  font-size: 16px;
+  font-size: 13px;
+  line-height: 1.2;
 `;
 
 const Content = styled.div`
